@@ -1,0 +1,57 @@
+﻿@inject SignInManager<AppUser> signInManager;
+@model IEnumerable<Penalty>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                        <h4 class="card-title">Road Users</h4>
+                        <p class="card-category">Here is the list of all penalised road users</p>
+                        <a asp-action="create" asp-controller="home" class="btn btn-primary btn-fill pull-right">Add Record</a>
+                    </div>
+                    <div class="card-body table-full-width table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <th>S/No</th>
+                            <th>Name</th>
+                            <th>Offence</th>
+                            <th>Fine</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var item = Model.ToList();
+                                    for (int i = 0; i < item.Count; i++)
+                                    {
+                                        var s_no = i + 1;
+                                        <tr>
+                                            <td>@s_no</td>
+                                            <td>@item[i].User.FullName</td>
+                                            <td>@item[i].Offence.OffenceType</td>
+                                            <td>@item[i].Offence.OffenceAmount</td>
+                                            <td>@item[i].PenaltyDate</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" data-toggle="modal" data-target="@("#penalty_dialog-" + @item[i].PenaltyID)" data-url="@Url.Action($"GetPenalty/{item[i].PenaltyID}")" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                @await Html.PartialAsync("_ModifyPopup", item[i])
+
+                                                <button type="button" rel="tooltip" data-toggle="modal" data-target="@("#delete-" + @item[i].PenaltyID)" data-url="@Url.Action($"GetPenalty/{item[i].PenaltyID}")" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                @await Html.PartialAsync("_DeletePopup", item[i])
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

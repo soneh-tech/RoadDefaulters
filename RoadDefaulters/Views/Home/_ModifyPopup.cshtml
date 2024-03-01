@@ -1,0 +1,69 @@
+﻿@model Penalty
+<div class="modal fade bd-example-modal-md" id="penalty_dialog-@Model.PenaltyID" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">User Information</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-action="modify" asp-controller="home">
+                <input type="hidden" asp-for="@Model.User.RoadUserID">
+                <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            <label asp-for="@Model.User.FullName">Full Names</label>
+                            <input type="text" class="form-control" asp-for="@Model.User.FullName" placeholder="Full Names">
+                            <span class="text-danger" asp-validation-for="@Model.User.FullName"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 px-1">
+                        <div class="form-group">
+                            <label asp-for="@Model.User.PhoneNumber">Phone Number</label>
+                            <input type="text" class="form-control" asp-for="@Model.User.PhoneNumber" placeholder="Full Names">
+                            <span class="text-danger" asp-validation-for="@Model.User.PhoneNumber"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 pl-1">
+                        <div class="form-group">
+                            <label asp-for="@Model.User.LicenseNumber">Licence Plate Number</label>
+                            <input type="text" class="form-control" asp-for="@Model.User.LicenseNumber" placeholder="Licence Plate Number">
+                            <span class="text-danger" asp-validation-for="@Model.User.LicenseNumber"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                            <label asp-for="@Model.OffenceID">Penalty</label>
+                            <select asp-items="@ViewBag.Offenses" asp-for="@Model.OffenceID" class="form-control"> </select>
+                            <span class="text-danger" asp-validation-for="@Model.OffenceID"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+                            <label asp-for="@Model.User.Address">Address</label>
+                            <textarea type="text" asp-for="@Model.User.Address" class="form-control" placeholder="Contact Address"> </textarea>
+                            <span class="text-danger" asp-validation-for="@Model.User.Address"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+                            <label asp-for="@Model.Details">Offense Details</label>
+                            <textarea type="text" asp-for="@Model.Details" class="form-control" placeholder="Details of the offence"> </textarea>
+                            <span class="text-danger" asp-validation-for="@Model.Details"></span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-fill pull-right" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-fill pull-right">Save Changes</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
